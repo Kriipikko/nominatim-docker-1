@@ -15,7 +15,7 @@ RUN apt-get -y update -qq && \
     apache2 php php-pgsql libapache2-mod-php php-pear php-db \
     php-intl git curl sudo \
     python-pip libboost-python-dev \
-    osmosis && \
+    osmosis dos2unix && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* /var/tmp/*
@@ -56,5 +56,8 @@ EXPOSE 5432
 EXPOSE 8080
 
 COPY start.sh /app/start.sh
-RUN chmod -R a+x /app
-#CMD /app/start.sh
+RUN chmod 777 /app/start.sh
+RUN dos2unix /app/start.sh
+CMD sh /app/start.sh
+#CMD service postgresql start
+#CMD /usr/sbin/apache2ctl -D FOREGROUND 
