@@ -30,11 +30,16 @@ If a different country should be used you can set `PBF_DATA` on build.
   ```
   ENV PBF_DATA http://download.geofabrik.de/europe/monaco-latest.osm.pbf
   ```
+  or use build-arg -parameter
+  ```
+  docker build -t nominatim --build-arg PBF_DATA=https://download.geofabrik.de/asia/vietnam-latest.osm.pbf .
+  ```
 3. Configure incrimental update. By default CONST_Replication_Url configured for Monaco.
 If you want a different update source, you will need to declare `CONST_Replication_Url` in local.php. Documentation [here] (https://github.com/openstreetmap/Nominatim/blob/master/docs/Import-and-Update.md#updates). For example, to use the daily country extracts diffs for Gemany from geofabrik add the following:
   ```
   @define('CONST_Replication_Url', 'http://download.geofabrik.de/europe/germany-updates');
   ```
+  Default is set to URL which won't update anything
 
 4. Build 
 
